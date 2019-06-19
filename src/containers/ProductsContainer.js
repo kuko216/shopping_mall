@@ -9,7 +9,15 @@ import productItems from 'data/productItems';
 
 const Wrapper = styled.div`
     margin: 0 auto;
-    width: 80%;
+    @media (max-width: 1920px) {
+        width: 80%;
+    }
+    @media (max-width: 1600px) {
+        width: 90%;
+    }
+    @media (max-width: 700px) {
+        width: 95%;
+    }
     display: flex;
     flex-wrap: wrap;
 `
