@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
+import { Link } from 'react-router-dom';
 
 import Product from 'components/Product';
 
@@ -22,6 +23,10 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
 `
 
+const WishlistLink = styled(Link)`
+
+`
+
 class ProductsContainer extends React.Component {
     render(){
         return (
@@ -35,6 +40,7 @@ class ProductsContainer extends React.Component {
                         key={index}
                     />
                 ))}
+                <WishlistLink to="/wishlist">계산하기</WishlistLink>
             </Wrapper>
         )
     }

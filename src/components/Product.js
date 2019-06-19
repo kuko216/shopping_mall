@@ -90,6 +90,14 @@ class Product extends React.Component{
         checked: false
     }
 
+    componentDidMount(){
+        if(this.props.marketStore.selectedItems.map(i=>i.id).indexOf(this.props.id) !== -1){
+            this.setState({
+                checked: true
+            })
+        }
+    }
+
     CheckButton = ({checked}) => {
         if(checked){
             return (
