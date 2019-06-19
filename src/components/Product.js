@@ -25,7 +25,7 @@ const Content = styled.div`
 
 `
 
-const Title = styled.h3`
+const Title = styled.span`
     margin: 0;
 `
 
@@ -33,15 +33,51 @@ const Price = styled.p`
     margin: 0;
 `
 
-const CoverImage = styled.img`
+const ImageWrapper = styled.div`
     width: 100%;
-    height: 200px;
-    object-fit: cover; 
-    object-position: center;
+    padding-top: 52.63%;
+    position: relative;
+    display: block;
 `
 
-const StyledButton = styled.button`
+const CoverImage = styled.img`
+    background: #dee2e6;
+    -o-object-fit: cover;
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+`
 
+const Spacer = styled.div`
+    flex: 1;
+`
+
+const PushButton = styled.button`
+    border: none;
+    font-size: 1rem;
+    width: 4rem;
+    height: 2rem;
+    background-color: ${oc.gray[7]}
+    color: white;        
+`
+
+const PopButton = styled.button`
+    border: none;
+    font-size: 1rem;
+    width: 4rem;
+    height: 2rem;
+    background-color: ${oc.gray[4]}
+    color: ${oc.gray[7]};    
+`
+
+const ButtonWrapper = styled.div`
+    display: flex;
 `
 
 
@@ -54,11 +90,11 @@ class Product extends React.Component{
     CheckButton = ({checked}) => {
         if(checked){
             return (
-                <StyledButton checked={checked} onClick={this.onClick}>빼기</StyledButton>
+                <PopButton checked={checked} onClick={this.onClick}>빼기</PopButton>
             )
         } else {
             return (
-                <StyledButton checked={checked} onClick={this.onClick}>담기</StyledButton>
+                <PushButton checked={checked} onClick={this.onClick}>담기</PushButton>
             )
         }
     }
@@ -76,10 +112,15 @@ class Product extends React.Component{
         return (
             <Wrapper>
                 <Content>
-                    <CoverImage src={coverImage}/>
+                    <ImageWrapper>
+                        <CoverImage src={coverImage}/>
+                    </ImageWrapper>
                     <Title>{title}</Title>
-                    <Price>{price}원</Price>
-                    { this.CheckButton({checked}) }
+                    <ButtonWrapper>
+                        <Price>{price}원</Price>
+                        <Spacer/>
+                        { this.CheckButton({checked}) }
+                    </ButtonWrapper>
                 </Content>
             </Wrapper>
         )

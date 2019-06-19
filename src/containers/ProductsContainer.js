@@ -9,7 +9,6 @@ import productItems from 'data/productItems';
 
 const Wrapper = styled.div`
     margin: 0 auto;
-    background-color: ${oc.gray[1]};
     width: 80%;
     display: flex;
     flex-wrap: wrap;
