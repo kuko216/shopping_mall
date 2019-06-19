@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 
+import { observer, inject } from 'mobx-react';
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -80,7 +82,8 @@ const ButtonWrapper = styled.div`
     display: flex;
 `
 
-
+@inject('marketStore')
+@observer
 class Product extends React.Component{
 
     state = {
@@ -90,19 +93,28 @@ class Product extends React.Component{
     CheckButton = ({checked}) => {
         if(checked){
             return (
-                <PopButton checked={checked} onClick={this.onClick}>빼기</PopButton>
+                <PopButton checked={checked} onClick={this.popItem}>빼기</PopButton>
             )
         } else {
             return (
-                <PushButton checked={checked} onClick={this.onClick}>담기</PushButton>
+                <PushButton checked={checked} onClick={this.pushItem}>담기</PushButton>
             )
         }
     }
 
-    onClick = (e) => {
+    pushItem = () => {
         this.setState({
-            checked: !this.state.checked
+            checked: true
         })
+        console.log(this.props.id)
+        this.props.marketStore.pushItem(this.props.id);
+    }
+
+    popItem = () => {
+        this.setState({
+            checked: false
+        })
+        this.props.marketStore.popItem(this.props.id);
     }
 
     render(){

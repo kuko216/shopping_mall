@@ -28,9 +28,11 @@ class ProductsContainer extends React.Component {
             <Wrapper>
                 {productItems.map((product, index) => (
                     <Product 
+                        id={product.id}
                         price={product.price}
                         title={product.title}
                         coverImage={product.coverImage}
+                        key={index}
                     />
                 ))}
             </Wrapper>

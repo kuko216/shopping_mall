@@ -4,10 +4,10 @@ export default class MarketStore {
   @observable selectedItems = [];
 
   @action
-  pushItem = ({id}) => {
-    if ( this.selectedItems.indexOf(id) === -1 ) {
+  pushItem = (id) => {
+    if ( this.selectedItems.map(i=>i.id).indexOf(id) === -1 ) {
       this.selectedItems.push({
-        id: id,  
+        id: id,
         count: 1,
       });
     }
@@ -15,12 +15,11 @@ export default class MarketStore {
   };
 
   @action
-  popItem = ({id}) => {
-    var index = this.selectedItems.indexOf(id);
+  popItem = (id) => {
+    var index = this.selectedItems.map(i=>i.id).indexOf(id);
     if (index > -1) {
-      this.stared.splice(index, 1);
+      this.selectedItems.splice(index, 1);
     }
     console.log(this.selectedItems);
   };
-  
 }
