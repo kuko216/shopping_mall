@@ -45,6 +45,7 @@ const SelectWrapper = styled.div`
 
 const CheckBox = styled.input`
     margin: auto 10px;
+    cursor: pointer;
 `
 
 const CountInput = styled.input`
@@ -52,7 +53,7 @@ const CountInput = styled.input`
 `
 
 const Select = styled.select`
-
+    cursor: pointer;
 `
 
 const Title = styled.span`

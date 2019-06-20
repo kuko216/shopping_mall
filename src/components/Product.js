@@ -52,8 +52,9 @@ const PushButton = styled.button`
     font-size: 1rem;
     width: 4rem;
     height: 2rem;
-    background-color: ${oc.gray[7]}
-    color: white;        
+    background-color: ${oc.red[6]}
+    color: white;     
+    cursor: pointer;   
 `
 
 const PopButton = styled.button`
@@ -61,8 +62,9 @@ const PopButton = styled.button`
     font-size: 1rem;
     width: 4rem;
     height: 2rem;
-    background-color: ${oc.gray[4]}
-    color: ${oc.gray[7]};    
+    background-color: ${oc.gray[2]}
+    color: ${oc.red[8]};
+    cursor: pointer;
 `
 
 const ButtonWrapper = styled.div`
