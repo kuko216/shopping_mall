@@ -22,8 +22,32 @@ const Wrapper = styled.div`
         width: 95%;
     }
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 `
+
+const ListWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+`
+
+const sampleData = [
+    {
+        id:'B9vUv0E0ibc0X55kVVLr',
+        count: 1,
+        checked: true
+    },
+    {
+        id:'81x83ysiEHsHCBoeVh2O',
+        count: 1,
+        checked: true
+    },
+    {
+        id:'ZXV8mCcvbpXKm5J5snUq',
+        count: 1,
+        checked: true
+    }
+]
 
 @inject('marketStore')
 @observer
@@ -32,20 +56,23 @@ class WishlistContainer extends React.Component {
         return (
             <Wrapper>
                 <Link to="/products">back</Link>
-                {
-                    this.props.marketStore.selectedItems.map((product, index) => {
-                        let item = productItems.find(item=>item.id === product.id); 
-                        return (
-                            <WishlistItem
-                                id={product.id}
-                                title={item.title}
-                                coverImage={item.coverImage}
-                                price={item.price}
-                                key={index}
-                            />
-                        )
-                    }
-                )}
+                <ListWrapper>
+                    {
+                        //this.props.marketStore.selectedItems.map((product, index) => {
+                        sampleData.map((product, index) => {
+                            let item = productItems.find(item=>item.id === product.id); 
+                            return (
+                                <WishlistItem
+                                    id={product.id}
+                                    title={item.title}
+                                    coverImage={item.coverImage}
+                                    price={item.price}
+                                    key={index}
+                                />
+                            )
+                        }
+                    )}
+                </ListWrapper>
             </Wrapper>
         )
     }

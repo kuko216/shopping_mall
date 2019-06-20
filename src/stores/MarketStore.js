@@ -9,6 +9,7 @@ export default class MarketStore {
       this.selectedItems.push({
         id: id,
         count: 1,
+        checked: true
       });
     }
     console.log(this.selectedItems);
