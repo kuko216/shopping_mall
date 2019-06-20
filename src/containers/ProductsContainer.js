@@ -8,6 +8,18 @@ import Product from 'components/Product';
 
 import productItems from 'data/productItems';
 
+const Header = styled.div`
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 10px;
+    box-sizing: border-box;
+`
+
+const Title = styled.h1`
+    margin: 0;
+`
+
 const Wrapper = styled.div`
     margin: 0 auto;
     width: 30%;
@@ -28,6 +40,17 @@ const Wrapper = styled.div`
 `
 
 const WishlistLink = styled(Link)`
+    font-size: 1.5rem;
+
+    width: 100%;
+    text-align: center;
+
+    background-color: ${oc.red[6]};
+    color: white;
+    
+    &:link { color: white;; text-decoration: none;}
+    &:visited { color: white;; text-decoration: none;}
+    &:hover { color: white;; text-decoration: none;}
 
 `
 
@@ -50,6 +73,12 @@ const Page = styled.button`
     &:focus {
         outline: 0;
     }
+`
+
+const LinkWrapper = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px 0;
 `
 
 class ProductsContainer extends React.Component {
@@ -81,6 +110,10 @@ class ProductsContainer extends React.Component {
 
     render(){
         return (
+            <>
+            <Header>
+                <Title>Products</Title>
+            </Header>
             <Wrapper>
                 {productItems.sort((a,b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0 ).map((product, index) => {
                     if( (this.state.pageCount-1)*5 <= index && index < (this.state.pageCount)*5 )
@@ -111,8 +144,11 @@ class ProductsContainer extends React.Component {
                     })}
                     <Page onClick={this.inPage}>{`»`}</Page>
                 </PageNation>
-                <WishlistLink to="/wishlist">계산하기</WishlistLink>
+                <LinkWrapper>
+                    <WishlistLink to="/wishlist">장바구니로 이동</WishlistLink>
+                </LinkWrapper>
             </Wrapper>
+            </>
         )
     }
 }

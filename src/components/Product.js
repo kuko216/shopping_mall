@@ -49,6 +49,7 @@ const Spacer = styled.div`
 
 const PushButton = styled.button`
     border: none;
+    border-radius: 30px;
     font-size: 1rem;
     width: 4rem;
     height: 2rem;
@@ -58,11 +59,12 @@ const PushButton = styled.button`
 `
 
 const PopButton = styled.button`
-    border: none;
+    border: 2px solid ${oc.red[6]};
+    border-radius: 30px;
     font-size: 1rem;
     width: 4rem;
     height: 2rem;
-    background-color: ${oc.gray[2]}
+    background-color: white;
     color: ${oc.red[8]};
     cursor: pointer;
 `
