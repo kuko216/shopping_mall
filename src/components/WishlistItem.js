@@ -75,12 +75,10 @@ class WishlistItem extends React.Component{
     }
 
     onChangeCoupon = (e) => {
-        console.log(e.target.value);
         this.props.marketStore.changeCoupon(this.props.id, e.target.value);
     }
 
     onChangeChecked = (e) => {
-        console.log(e.target.value);
         this.props.marketStore.toggleChecked(this.props.id);
     }
 
