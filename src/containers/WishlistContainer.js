@@ -7,6 +7,7 @@ import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
 import productItems from 'data/productItems';
+import coupons from 'data/coupons';
 
 import WishlistItem from 'components/WishlistItem'
 
@@ -67,6 +68,8 @@ class WishlistContainer extends React.Component {
                                     title={item.title}
                                     coverImage={item.coverImage}
                                     price={item.price}
+                                    coupons={coupons}
+                                    index={index}
                                     key={index}
                                 />
                             )

@@ -4,6 +4,11 @@ import oc from 'open-color';
 
 import { observer, inject } from 'mobx-react';
 
+const Container = styled.div`
+    display: flex;
+    width: 100%;
+`
+
 const WhiteBox = styled.div`
     width: 100%;
     margin: 5px 0;
@@ -25,35 +30,73 @@ const CoverImage = styled.img`
     display: block;
 `
 
-const CheckBox = styled.input`
+const TextBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+`
 
+const CheckBox = styled.input`
+    margin: auto 10px;
 `
 
 const CountInput = styled.input`
-
+    width: 50px;
 `
 
 const Select = styled.select`
 
 `
 
+const Title = styled.span`
+    margin: 0;
+`
+
+const Price = styled.h3`
+    margin: 0;
+`
+
+const SelectBox = styled.div`
+    width: 100%;
+    display: flex;
+`
+
+const Desc = styled.span`
+    margin-right: 10px;
+`
+
 @inject('marketStore')
 @observer
 class WishlistItem extends React.Component{
     render(){
-        const { title, price, coverImage } = this.props;
+        const { title, price, coverImage, index } = this.props;
 
         return (
-            <WhiteBox>
-                <Wrapper>
-                    <CheckBox type="checkbox" />
-                    <CoverImage src={coverImage}/>
-                    {title}
-                    {price}
-                    <CountInput type="number" />
-                    <Select />
-                </Wrapper>
-            </WhiteBox>
+            <Container>
+                <CheckBox type="checkbox" id={"checkbox"+index} />
+                <WhiteBox>
+                    <Wrapper>
+                        <CoverImage src={coverImage}/>
+                        <TextBox>
+                            <Title>{title}</Title>
+                            <Price>{price}원</Price>
+
+                            <SelectBox>
+                                <Desc>갯수</Desc>
+                                <CountInput type="number" />
+                            </SelectBox>
+                            <SelectBox>
+                                <Desc>쿠폰</Desc>
+                                <Select>
+                                    <option selected>쿠폰을 선택하세요.</option>
+                                    <option>옵션1</option>
+                                    <option>옵션2</option>
+                                </Select>
+                            </SelectBox>
+                        </TextBox>
+                    </Wrapper>
+                </WhiteBox>
+            </Container>
         )
     }
   };

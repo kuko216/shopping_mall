@@ -7,19 +7,7 @@ import { observer, inject } from 'mobx-react';
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 25%;
-    @media (max-width: 1920px) {
-        width: 25%;
-    }
-    @media (max-width: 1600px) {
-        width: 33%;
-    }
-    @media (max-width: 1200px) {
-        width: 50%;
-    }
-    @media (max-width: 700px) {
-        width: 100%;
-    }
+    width: 100%;
 `
 
 const Content = styled.div`
