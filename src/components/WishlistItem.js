@@ -68,8 +68,21 @@ const Desc = styled.span`
 @inject('marketStore')
 @observer
 class WishlistItem extends React.Component{
+
+    onChangeCount = (e) => {
+        if(e.target.value <= 0){ return; }
+        this.props.marketStore.changeCount(this.props.id, e.target.value);
+    }
+
+    onChangeCoupon = (e) => {
+        console.log(e.target.value);
+        this.props.marketStore.changeCoupon(this.props.id, e.target.value);
+    }
+
     render(){
         const { title, price, coverImage, index } = this.props;
+
+        const { count, coupon } = this.props.marketStore.getItem(this.props.id);
 
         return (
             <Container>
@@ -83,14 +96,22 @@ class WishlistItem extends React.Component{
 
                             <SelectBox>
                                 <Desc>갯수</Desc>
-                                <CountInput type="number" />
+                                <CountInput 
+                                    type="number" 
+                                    value={count}
+                                    onChange={this.onChangeCount}
+                                />
                             </SelectBox>
                             <SelectBox>
                                 <Desc>쿠폰</Desc>
-                                <Select>
-                                    <option selected>쿠폰을 선택하세요.</option>
-                                    <option>옵션1</option>
-                                    <option>옵션2</option>
+                                <Select value={coupon} onChange={this.onChangeCoupon}>
+                                    <option value={null}>쿠폰을 선택하세요.</option>
+                                    {this.props.coupons.map((coupon, index) => (
+                                        <option
+                                            value={coupon.title}
+                                            key={index}
+                                        >{coupon.title}</option>
+                                    ))}
                                 </Select>
                             </SelectBox>
                         </TextBox>

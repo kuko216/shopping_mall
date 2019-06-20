@@ -59,8 +59,8 @@ class WishlistContainer extends React.Component {
                 <Link to="/products">back</Link>
                 <ListWrapper>
                     {
-                        //this.props.marketStore.selectedItems.map((product, index) => {
-                        sampleData.map((product, index) => {
+                        this.props.marketStore.selectedItems.map((product, index) => {
+                        //sampleData.map((product, index) => {
                             let item = productItems.find(item=>item.id === product.id); 
                             return (
                                 <WishlistItem
