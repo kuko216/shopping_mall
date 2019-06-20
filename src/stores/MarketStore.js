@@ -54,7 +54,6 @@ export default class MarketStore {
   @action
   setCoupon = (coupon) => {
     this.coupon = coupon;
-    console.log(this.coupon);
   }
 
   @computed

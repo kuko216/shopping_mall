@@ -25,6 +25,7 @@ const Title = styled.h1`
 
 const ProductsLink = styled(Link)`
     font-size: 1.5rem;
+    border-radius: 10px;
 
     width: 100%;
     text-align: center;
@@ -117,7 +118,7 @@ class WishlistContainer extends React.Component {
                         <Option value={coupon.title} key={index}>{coupon.title}</Option>
                     )}
                 </Select>
-                <TotalPrice>총 가격: {this.props.marketStore.total}원</TotalPrice>
+                <TotalPrice>총 가격: {this.props.marketStore.total < 0?0:this.props.marketStore.total.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}원</TotalPrice>
                 <ProductsLink to="/products">목록 페이지로 이동</ProductsLink>
             </Wrapper>
             </>

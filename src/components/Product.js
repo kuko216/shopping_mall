@@ -145,7 +145,7 @@ class Product extends React.Component{
                     <Spacer/>
                     <ButtonWrapper>
                         <PriceWrapper>
-                            <Price>{price}원</Price>
+                            <Price>{price.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}원</Price>
                         </PriceWrapper>
                         <Spacer/>
                         { this.CheckButton({checked}) }

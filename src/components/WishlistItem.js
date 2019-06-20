@@ -127,7 +127,7 @@ class WishlistItem extends React.Component{
                             <CoverImage src={coverImage}/>
                             <TextBox>
                                 <Title>{title}</Title>
-                                <Price>{price}원</Price>
+                                <Price>{price.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}원</Price>
                             </TextBox>
                         </Content>
                         <Spacer />

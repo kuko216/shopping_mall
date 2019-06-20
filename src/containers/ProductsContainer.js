@@ -41,6 +41,7 @@ const Wrapper = styled.div`
 
 const WishlistLink = styled(Link)`
     font-size: 1.5rem;
+    border-radius: 10px;
 
     width: 100%;
     text-align: center;
@@ -64,7 +65,8 @@ const PageNation = styled.div`
 const Page = styled.button`
     margin: 0 1px;
     border: none;
-    font-size: 1.2rem;
+    border-radius:5px;
+    font-size: 1.5rem;
     background-color: white;
     cursor: pointer;
     &:hover{
@@ -137,7 +139,6 @@ class ProductsContainer extends React.Component {
                     <Page onClick={this.dePage}>{`«`}</Page>
                     {productItems.map((product, index) => {
                         if(index % 5 === 0){
-                            console.log(index/5+1,this.state.pageCount)
                             return <Page 
                                 value={index/5+1} 
                                 onClick={this.pageChange}
