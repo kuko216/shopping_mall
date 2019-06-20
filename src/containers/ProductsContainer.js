@@ -15,7 +15,10 @@ const Wrapper = styled.div`
         width: 30%;
     }
     @media (max-width: 1600px) {
-        width: 50%
+        width: 40%
+    }
+    @media (max-width: 1200px) {
+        width: 60%
     }
     @media (max-width: 700px) {
         width: 95%;
@@ -29,18 +32,25 @@ const WishlistLink = styled(Link)`
 `
 
 class ProductsContainer extends React.Component {
+    state = {
+        pageCount: 1
+    }
     render(){
         return (
             <Wrapper>
-                {productItems.map((product, index) => (
-                    <Product 
-                        id={product.id}
-                        price={product.price}
-                        title={product.title}
-                        coverImage={product.coverImage}
-                        key={index}
-                    />
-                ))}
+                {productItems.sort((a,b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0 ).map((product, index) => {
+                    if( (this.state.pageCount-1)*5 <= index && index < (this.state.pageCount)*5 )
+                    return (
+                        <Product
+                            id={product.id}
+                            price={product.price}
+                            title={product.title}
+                            coverImage={product.coverImage}
+                            key={index}
+                        />
+                    )
+                })}
+                
                 <WishlistLink to="/wishlist">계산하기</WishlistLink>
             </Wrapper>
         )

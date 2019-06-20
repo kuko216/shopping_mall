@@ -57,7 +57,7 @@ export default class MarketStore {
     return this.selectedItems.reduce((privious, current) => {
       if(current.checked){
         console.log(current.coupon)
-        if(current.coupon !== null && current.coupon !== '쿠폰을 선택하세요.' && current.coupon !== '쿠폰 적용 불가 상품입니다.'){
+        if(current.coupon !== null && current.coupon !== '쿠폰을 선택하세요.' && current.coupon !== '쿠폰 적용 불가 상품'){
           let currentCoupon = coupons.find(coupone => coupone.title === current.coupon);
           if(currentCoupon.type === 'rate'){
             return privious + ( current.price * current.count / 100 * (100 - currentCoupon.discountRate) );

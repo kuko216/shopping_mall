@@ -8,11 +8,12 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    margin: 10px 0;
 `
 
 const Content = styled.div`
     padding: 10px;
-
 `
 
 const Title = styled.span`
@@ -35,8 +36,6 @@ const CoverImage = styled.img`
     -o-object-fit: cover;
     object-fit: cover;
     display: block;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
     position: absolute;
     top: 0;
     left: 0;
@@ -122,10 +121,10 @@ class Product extends React.Component{
 
         return (
             <Wrapper>
+                <ImageWrapper>
+                    <CoverImage src={coverImage}/>
+                </ImageWrapper>
                 <Content>
-                    <ImageWrapper>
-                        <CoverImage src={coverImage}/>
-                    </ImageWrapper>
                     <Title>{title}</Title>
                     <ButtonWrapper>
                         <Price>{price}원</Price>

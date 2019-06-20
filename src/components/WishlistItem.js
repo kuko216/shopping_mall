@@ -13,7 +13,7 @@ const WhiteBox = styled.div`
     width: 100%;
     margin: 5px 0;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    height: 200px;
+    height: 100px;
 `
 
 const Wrapper = styled.div`
@@ -25,12 +25,19 @@ const Wrapper = styled.div`
 
 const CoverImage = styled.img`
     height: 100%;
-    width: 300px;
+    width: 150px;
     background: #dee2e6;
     display: block;
 `
 
 const TextBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 300px;
+`
+
+const SelectWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -65,6 +72,10 @@ const Desc = styled.span`
     margin-right: 10px;
 `
 
+const Spacer = styled.div`
+    flex:1;
+`
+
 @inject('marketStore')
 @observer
 class WishlistItem extends React.Component{
@@ -92,7 +103,7 @@ class WishlistItem extends React.Component{
                 >{coupon.title}</option>
             ))
         } else {
-            return <option>쿠폰 적용 불가 상품입니다.</option>
+            return <option>쿠폰 적용 불가 상품</option>
         }
     }
 
@@ -110,8 +121,10 @@ class WishlistItem extends React.Component{
                         <TextBox>
                             <Title>{title}</Title>
                             <Price>{price}원</Price>
-
-                            <SelectBox>
+                        </TextBox>
+                        <Spacer />
+                        <SelectWrapper>
+                        <SelectBox>
                                 <Desc>개수</Desc>
                                 <CountInput 
                                     type="number" 
@@ -126,7 +139,7 @@ class WishlistItem extends React.Component{
                                     { this.getCoupons() }
                                 </Select>
                             </SelectBox>
-                        </TextBox>
+                        </SelectWrapper>
                     </Wrapper>
                 </WhiteBox>
             </Container>
