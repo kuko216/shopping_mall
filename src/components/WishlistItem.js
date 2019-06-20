@@ -12,9 +12,12 @@ const Wrapper = styled.div`
 @observer
 class WishlistItem extends React.Component{
     render(){
+        const { title, price } = this.props;
+
         return (
             <Wrapper>
-                {this.props.id}
+                {title}
+                {price}
             </Wrapper>
         )
     }

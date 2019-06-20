@@ -6,6 +6,8 @@ import oc from 'open-color';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
+import productItems from 'data/productItems';
+
 import WishlistItem from 'components/WishlistItem'
 
 const Wrapper = styled.div`
@@ -30,10 +32,19 @@ class WishlistContainer extends React.Component {
         return (
             <Wrapper>
                 <Link to="/products">back</Link>
-                {this.props.marketStore.selectedItems.map((product, index) => 
-                    <WishlistItem
-                        id={product.id}
-                    />
+                {
+                    this.props.marketStore.selectedItems.map((product, index) => {
+                        let item = productItems.find(item=>item.id === product.id); 
+                        return (
+                            <WishlistItem
+                                id={product.id}
+                                title={item.title}
+                                coverImage={item.coverImage}
+                                price={item.price}
+                                key={index}
+                            />
+                        )
+                    }
                 )}
             </Wrapper>
         )
