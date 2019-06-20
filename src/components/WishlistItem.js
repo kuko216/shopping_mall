@@ -52,10 +52,6 @@ const CountInput = styled.input`
     width: 50px;
 `
 
-const Select = styled.select`
-    cursor: pointer;
-`
-
 const Title = styled.span`
     margin: 0;
 `
@@ -94,20 +90,6 @@ class WishlistItem extends React.Component{
         this.props.marketStore.toggleChecked(this.props.id);
     }
 
-    getCoupons = () => {
-        console.log(this.props.coupons);
-        if(this.props.coupons){
-            return this.props.coupons.map((coupon, index) => (
-                <option
-                    value={coupon.title}
-                    key={index}
-                >{coupon.title}</option>
-            ))
-        } else {
-            return <option>쿠폰 적용 불가 상품</option>
-        }
-    }
-
     render(){
         const { title, price, coverImage, index } = this.props;
 
@@ -125,20 +107,14 @@ class WishlistItem extends React.Component{
                         </TextBox>
                         <Spacer />
                         <SelectWrapper>
-                        <SelectBox>
+                            <Spacer />
+                            <SelectBox>
                                 <Desc>개수</Desc>
                                 <CountInput 
                                     type="number" 
                                     value={count}
                                     onChange={this.onChangeCount}
                                 />
-                            </SelectBox>
-                            <SelectBox>
-                                <Desc>쿠폰</Desc>
-                                <Select value={coupon} onChange={this.onChangeCoupon}>
-                                    <option value={null}>쿠폰을 선택하세요.</option>
-                                    { this.getCoupons() }
-                                </Select>
                             </SelectBox>
                         </SelectWrapper>
                     </Wrapper>

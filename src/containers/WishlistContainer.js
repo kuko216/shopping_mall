@@ -32,27 +32,26 @@ const ListWrapper = styled.div`
     box-sizing: border-box;
 `
 
-const sampleData = [
-    {
-        id:'B9vUv0E0ibc0X55kVVLr',
-        count: 1,
-        checked: true
-    },
-    {
-        id:'81x83ysiEHsHCBoeVh2O',
-        count: 1,
-        checked: true
-    },
-    {
-        id:'ZXV8mCcvbpXKm5J5snUq',
-        count: 1,
-        checked: true
-    }
-]
+const Select = styled.select`
+    cursor: pointer;
+    width: 50%;
+`
+
+const Option = styled.option`
+    cursor: pointer;
+`
+
+const Text = styled.p`
+    margin: 0;
+`
 
 @inject('marketStore')
 @observer
 class WishlistContainer extends React.Component {
+    selectCoupon = (e) => {
+        this.props.marketStore.setCoupon(coupons.find(coupon => coupon.title === e.target.value));
+    }
+
     render(){
         return (
             <Wrapper>
@@ -60,7 +59,6 @@ class WishlistContainer extends React.Component {
                 <ListWrapper>
                     {
                         this.props.marketStore.selectedItems.map((product, index) => {
-                        //sampleData.map((product, index) => {
                             let item = productItems.find(item=>item.id === product.id); 
                             return (
                                 <WishlistItem
@@ -76,6 +74,13 @@ class WishlistContainer extends React.Component {
                         }
                     )}
                 </ListWrapper>
+                <Text>쿠폰 적용</Text>
+                <Select onChange={this.selectCoupon}>
+                    <Option>쿠폰을 선택해 주세요.</Option>
+                    {coupons.map((coupon, index) =>
+                        <Option value={coupon.title} key={index}>{coupon.title}</Option>
+                    )}
+                </Select>
                 {this.props.marketStore.total}
             </Wrapper>
         )
