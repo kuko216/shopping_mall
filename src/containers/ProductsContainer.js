@@ -24,7 +24,7 @@ const Wrapper = styled.div`
         width: 95%;
     }
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 `
 
 const WishlistLink = styled(Link)`
@@ -33,10 +33,23 @@ const WishlistLink = styled(Link)`
 
 const PageNation = styled.div`
     display: flex;
+    margin: auto;
 `
 
 const Page = styled.button`
-
+    margin: 0 1px;
+    border: none;
+    font-size: 1.2rem;
+    background-color: white;
+    cursor: pointer;
+    &:hover{
+        background-color: ${oc.red[1]}
+        ${ props => props.selected?`background-color:${oc.red[6]};color:white`:`` }
+    }
+    ${ props => props.selected?`background-color:${oc.red[6]};color:white`:`` }
+    &:focus {
+        outline: 0;
+    }
 `
 
 class ProductsContainer extends React.Component {
@@ -45,9 +58,11 @@ class ProductsContainer extends React.Component {
     }
 
     inPage = () => {
-        this.setState({
-            pageCount: this.state.pageCount+1
-        })
+        if(this.state.pageCount < productItems.length/5){
+            this.setState({
+                pageCount: this.state.pageCount+1
+            })
+        }
     }
 
     dePage = () => {
@@ -60,12 +75,11 @@ class ProductsContainer extends React.Component {
 
     pageChange = (e) => {
         this.setState({
-            pageCount: e.target.value
+            pageCount: Number(e.target.value)
         });
     }
 
     render(){
-        console.log(this.state.pageCount);
         return (
             <Wrapper>
                 {productItems.sort((a,b) => a.score < b.score ? 1 : a.score > b.score ? -1 : 0 ).map((product, index) => {
@@ -81,13 +95,21 @@ class ProductsContainer extends React.Component {
                     )
                 })}
                 <PageNation>
-                    <Page onClick={this.dePage}>{`<<`}</Page>
+                    <Page onClick={this.dePage}>{`«`}</Page>
                     {productItems.map((product, index) => {
                         if(index % 5 === 0){
-                            return <Page value={index/5+1} onClick={this.pageChange} key={index}>{index/5+1}</Page>
+                            console.log(index/5+1,this.state.pageCount)
+                            return <Page 
+                                value={index/5+1} 
+                                onClick={this.pageChange}
+                                selected={index/5+1 === this.state.pageCount?1:0}
+                                key={index}
+                            >
+                                {index/5+1}
+                            </Page>
                         }
                     })}
-                    <Page onClick={this.inPage}>{`>>`}</Page>
+                    <Page onClick={this.inPage}>{`»`}</Page>
                 </PageNation>
                 <WishlistLink to="/wishlist">계산하기</WishlistLink>
             </Wrapper>

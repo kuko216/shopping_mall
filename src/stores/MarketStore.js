@@ -59,23 +59,18 @@ export default class MarketStore {
 
   @computed
   get total(){
-    // return this.selectedItems.reduce((privious, current) => {
-    //   if(current.checked){
-    //     console.log(current.coupon)
-    //     if(current.coupon !== null && current.coupon !== '쿠폰을 선택하세요.' && current.coupon !== '쿠폰 적용 불가 상품'){
-    //       let currentCoupon = coupons.find(coupone => coupone.title === current.coupon);
-    //       if(currentCoupon.type === 'rate'){
-    //         return privious + ( current.price * current.count / 100 * (100 - currentCoupon.discountRate) );
-    //       } else {
-    //         return privious + ( current.price * current.count - currentCoupon.discountAmount );
-    //       }
-    //     } else {
-    //         return privious + ( current.price * current.count );
-    //     }
-    //   } else {
-    //     return privious;
-    //   }
-    // }, 0);
+    return this.selectedItems.reduce((privious, current) => {
+      if(current.checked){
+        if(this.coupon){
+          if(this.coupon.type === 'rate'){
+            
+          }
+        }
+        return privious + ( current.price * current.count );
+      } else {
+        return privious;
+      }
+    }, 0);
   }
 
 }
