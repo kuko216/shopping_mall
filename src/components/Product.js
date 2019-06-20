@@ -103,7 +103,7 @@ class Product extends React.Component{
             checked: true
         })
         console.log(this.props.id)
-        this.props.marketStore.pushItem(this.props.id);
+        this.props.marketStore.pushItem(this.props.id, this.props.price);
     }
 
     popItem = () => {

@@ -76,6 +76,7 @@ class WishlistContainer extends React.Component {
                         }
                     )}
                 </ListWrapper>
+                {this.props.marketStore.total}
             </Wrapper>
         )
     }

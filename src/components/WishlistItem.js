@@ -79,14 +79,19 @@ class WishlistItem extends React.Component{
         this.props.marketStore.changeCoupon(this.props.id, e.target.value);
     }
 
+    onChangeChecked = (e) => {
+        console.log(e.target.value);
+        this.props.marketStore.toggleChecked(this.props.id);
+    }
+
     render(){
         const { title, price, coverImage, index } = this.props;
 
-        const { count, coupon } = this.props.marketStore.getItem(this.props.id);
+        const { count, coupon, checked } = this.props.marketStore.getItem(this.props.id);
 
         return (
             <Container>
-                <CheckBox type="checkbox" id={"checkbox"+index} />
+                <CheckBox type="checkbox" defaultChecked={checked} onChange={this.onChangeChecked}/>
                 <WhiteBox>
                     <Wrapper>
                         <CoverImage src={coverImage}/>

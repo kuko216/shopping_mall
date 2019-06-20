@@ -6,11 +6,12 @@ export default class MarketStore {
   @observable selectedItems = [];
 
   @action.bound
-  pushItem = (id) => {
+  pushItem = (id, price) => {
     if ( this.selectedItems.map(i=>i.id).indexOf(id) === -1 ) {
       this.selectedItems.push({
         id: id,
         count: 1,
+        price: price,
         checked: true,
         coupon: null
       });
@@ -44,5 +45,18 @@ export default class MarketStore {
     console.log(this.selectedItems.find(item=>item.id === id))
   }
 
-  
+  @action.bound
+  toggleChecked = (id, checked) => {
+    let item = this.selectedItems.find(item=>item.id === id);
+    item.checked = !item.checked;
+    console.log(this.selectedItems.find(item=>item.id === id))
+  }
+
+  @computed
+  get total(){
+    return this.selectedItems.reduce((privious, current) => {
+      return privious + current.price * current.count;
+    }, 0);
+  }
+
 }
