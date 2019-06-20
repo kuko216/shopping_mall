@@ -5,14 +5,14 @@ export default class MarketStore {
   @observable coupon = null;
 
   @action.bound
-  pushItem = (id, price) => {
+  pushItem = (id, price, availableCoupon) => {
     if ( this.selectedItems.map(i=>i.id).indexOf(id) === -1 ) {
       this.selectedItems.push({
         id: id,
         count: 1,
         price: price,
         checked: true,
-        coupon: null
+        availableCoupon: availableCoupon
       });
     }
   };
@@ -59,18 +59,37 @@ export default class MarketStore {
 
   @computed
   get total(){
-    return this.selectedItems.reduce((privious, current) => {
-      if(current.checked){
-        if(this.coupon){
-          if(this.coupon.type === 'rate'){
-            
+    if(this.coupon){
+      if(this.coupon.type === 'amount'){
+        return this.selectedItems.reduce((privious, current) => {
+          if(current.checked){
+            return privious + ( current.price * current.count );
+          } else {
+            return privious;
           }
-        }
-        return privious + ( current.price * current.count );
-      } else {
-        return privious;
+        }, this.coupon.discountAmount*-1);
+      } else if(this.coupon.type === 'rate'){
+        return this.selectedItems.reduce((privious, current) => {
+          if(current.checked){
+            if(current.availableCoupon){
+              return privious + ( current.price * current.count / 100 * (100 - this.coupon.discountRate) );
+            } else {
+              return privious + ( current.price * current.count );
+            }
+          } else {
+            return privious;
+          }
+        }, 0);
       }
-    }, 0);
+    } else {
+      return this.selectedItems.reduce((privious, current) => {
+        if(current.checked){
+          return privious + ( current.price * current.count );
+        } else {
+          return privious;
+        }
+      }, 0);
+    }
   }
 
 }

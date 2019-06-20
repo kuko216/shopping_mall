@@ -20,7 +20,13 @@ const Title = styled.span`
     margin: 0;
 `
 
+const PriceWrapper = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+`
+
 const Price = styled.p`
+    font-weight: 600;
     margin: 0;
 `
 
@@ -56,6 +62,9 @@ const PushButton = styled.button`
     background-color: ${oc.red[6]}
     color: white;     
     cursor: pointer;   
+    &:hover{
+        background-color: ${oc.red[8]}
+    }
 `
 
 const PopButton = styled.button`
@@ -67,6 +76,9 @@ const PopButton = styled.button`
     background-color: white;
     color: ${oc.red[8]};
     cursor: pointer;
+    &:hover{
+        background-color: ${oc.red[1]}
+    }
 `
 
 const ButtonWrapper = styled.div`
@@ -109,7 +121,7 @@ class Product extends React.Component{
         this.setState({
             checked: true
         })
-        this.props.marketStore.pushItem(this.props.id, this.props.price);
+        this.props.marketStore.pushItem(this.props.id, this.props.price, this.props.availableCoupon);
     }
 
     popItem = () => {
@@ -130,8 +142,11 @@ class Product extends React.Component{
                 </ImageWrapper>
                 <Content>
                     <Title>{title}</Title>
+                    <Spacer/>
                     <ButtonWrapper>
-                        <Price>{price}원</Price>
+                        <PriceWrapper>
+                            <Price>{price}원</Price>
+                        </PriceWrapper>
                         <Spacer/>
                         { this.CheckButton({checked}) }
                     </ButtonWrapper>

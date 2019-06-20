@@ -50,8 +50,10 @@ const WishlistLink = styled(Link)`
     
     &:link { color: white;; text-decoration: none;}
     &:visited { color: white;; text-decoration: none;}
-    &:hover { color: white;; text-decoration: none;}
-
+    &:hover { 
+        color: white;; text-decoration: none;
+        background-color: ${oc.red[8]};
+    }
 `
 
 const PageNation = styled.div`
@@ -123,6 +125,7 @@ class ProductsContainer extends React.Component {
                             price={product.price}
                             title={product.title}
                             coverImage={product.coverImage}
+                            availableCoupon={product.availableCoupon === false?false:true}
                             key={index}
                         />
                     )
