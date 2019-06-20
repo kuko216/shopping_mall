@@ -99,10 +99,13 @@ class Product extends React.Component{
     }
 
     pushItem = () => {
+        if(this.props.marketStore.getLength() >= 3){
+            alert('장바구니는 최대 3개의 상품만 담을 수 있습니다.');
+            return;
+        }
         this.setState({
             checked: true
         })
-        console.log(this.props.id)
         this.props.marketStore.pushItem(this.props.id, this.props.price);
     }
 

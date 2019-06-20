@@ -18,7 +18,12 @@ export default class MarketStore {
     }
   };
 
-  @action.bound
+  @action
+  getLength = () => {
+    return this.selectedItems.length;
+  }
+  
+  @action
   popItem = (id) => {
     var index = this.selectedItems.map(i=>i.id).indexOf(id);
     if (index > -1) {
@@ -26,22 +31,22 @@ export default class MarketStore {
     }
   };
 
-  @action.bound
+  @action
   getItem = (id) => {
     return this.selectedItems.find(item=>item.id === id);
   }
 
-  @action.bound
+  @action
   changeCount = (id, count) => {
     this.selectedItems.find(item=>item.id === id).count = count;
   }
 
-  @action.bound
+  @action
   changeCoupon = (id, coupon) => {
     this.selectedItems.find(item=>item.id === id).coupon = coupon;
   }
 
-  @action.bound
+  @action
   toggleChecked = (id, checked) => {
     let item = this.selectedItems.find(item=>item.id === id);
     item.checked = !item.checked;
@@ -52,7 +57,7 @@ export default class MarketStore {
     return this.selectedItems.reduce((privious, current) => {
       if(current.checked){
         console.log(current.coupon)
-        if(current.coupon !== null && current.coupon !== '쿠폰을 선택하세요.'){
+        if(current.coupon !== null && current.coupon !== '쿠폰을 선택하세요.' && current.coupon !== '쿠폰 적용 불가 상품입니다.'){
           let currentCoupon = coupons.find(coupone => coupone.title === current.coupon);
           if(currentCoupon.type === 'rate'){
             return privious + ( current.price * current.count / 100 * (100 - currentCoupon.discountRate) );

@@ -82,10 +82,24 @@ class WishlistItem extends React.Component{
         this.props.marketStore.toggleChecked(this.props.id);
     }
 
+    getCoupons = () => {
+        console.log(this.props.coupons);
+        if(this.props.coupons){
+            return this.props.coupons.map((coupon, index) => (
+                <option
+                    value={coupon.title}
+                    key={index}
+                >{coupon.title}</option>
+            ))
+        } else {
+            return <option>쿠폰 적용 불가 상품입니다.</option>
+        }
+    }
+
     render(){
         const { title, price, coverImage, index } = this.props;
 
-        const { count, coupon, checked } = this.props.marketStore.getItem(this.props.id);
+        const { count, coupon, checked } = this.props.marketStore.getItem(this.props.id);    
 
         return (
             <Container>
@@ -98,7 +112,7 @@ class WishlistItem extends React.Component{
                             <Price>{price}원</Price>
 
                             <SelectBox>
-                                <Desc>갯수</Desc>
+                                <Desc>개수</Desc>
                                 <CountInput 
                                     type="number" 
                                     value={count}
@@ -109,12 +123,7 @@ class WishlistItem extends React.Component{
                                 <Desc>쿠폰</Desc>
                                 <Select value={coupon} onChange={this.onChangeCoupon}>
                                     <option value={null}>쿠폰을 선택하세요.</option>
-                                    {this.props.coupons.map((coupon, index) => (
-                                        <option
-                                            value={coupon.title}
-                                            key={index}
-                                        >{coupon.title}</option>
-                                    ))}
+                                    { this.getCoupons() }
                                 </Select>
                             </SelectBox>
                         </TextBox>

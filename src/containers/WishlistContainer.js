@@ -68,7 +68,7 @@ class WishlistContainer extends React.Component {
                                     title={item.title}
                                     coverImage={item.coverImage}
                                     price={item.price}
-                                    coupons={coupons}
+                                    coupons={item.availableCoupon === false?null:coupons}
                                     index={index}
                                     key={index}
                                 />
