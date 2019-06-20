@@ -7,6 +7,9 @@ import { observer, inject } from 'mobx-react';
 const Container = styled.div`
     display: flex;
     width: 100%;
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
 `
 
 const WhiteBox = styled.div`
@@ -14,12 +17,22 @@ const WhiteBox = styled.div`
     margin: 5px 0;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
     height: 100px;
+    @media (max-width: 650px) {
+        height: 150px;
+    }
 `
 
 const Wrapper = styled.div`
     height: 100%;
     box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    @media (max-width: 650px) {
+        flex-direction: column;
+    }
+`
+
+const Content = styled.div`
     display: flex;
 `
 
@@ -33,14 +46,19 @@ const CoverImage = styled.img`
 const TextBox = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 0 10px;
     max-width: 300px;
 `
 
 const SelectWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: 10px;
+`
+
+const CheckBoxPositioner = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
 `
 
 const CheckBox = styled.input`
@@ -54,19 +72,22 @@ const CountInput = styled.input`
 
 const Title = styled.span`
     margin: 0;
+    display: block;
 `
 
 const Price = styled.h3`
     margin: 0;
+    display: block;
 `
 
 const SelectBox = styled.div`
-    width: 100%;
     display: flex;
+    flex-direction: row-reverse;
 `
 
 const Desc = styled.span`
     margin-right: 10px;
+    display: block;
 `
 
 const Spacer = styled.div`
@@ -78,7 +99,7 @@ const Spacer = styled.div`
 class WishlistItem extends React.Component{
 
     onChangeCount = (e) => {
-        if(e.target.value <= 0){ return; }
+        if(e.target.value < 0){ return; }
         this.props.marketStore.changeCount(this.props.id, e.target.value);
     }
 
@@ -97,24 +118,27 @@ class WishlistItem extends React.Component{
 
         return (
             <Container>
-                <CheckBox type="checkbox" defaultChecked={checked} onChange={this.onChangeChecked}/>
+                <CheckBoxPositioner>
+                    <CheckBox type="checkbox" defaultChecked={checked} onChange={this.onChangeChecked}/>
+                </CheckBoxPositioner>
                 <WhiteBox>
                     <Wrapper>
-                        <CoverImage src={coverImage}/>
-                        <TextBox>
-                            <Title>{title}</Title>
-                            <Price>{price}원</Price>
-                        </TextBox>
+                        <Content>
+                            <CoverImage src={coverImage}/>
+                            <TextBox>
+                                <Title>{title}</Title>
+                                <Price>{price}원</Price>
+                            </TextBox>
+                        </Content>
                         <Spacer />
                         <SelectWrapper>
-                            <Spacer />
-                            <SelectBox>
-                                <Desc>개수</Desc>
+                            <SelectBox id="box">
                                 <CountInput 
                                     type="number" 
                                     value={count}
                                     onChange={this.onChangeCount}
                                 />
+                                <Desc>개수</Desc>
                             </SelectBox>
                         </SelectWrapper>
                     </Wrapper>

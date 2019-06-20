@@ -89,6 +89,7 @@ class ProductsContainer extends React.Component {
     }
 
     inPage = () => {
+        window.scrollTo(0, 0);
         if(this.state.pageCount < productItems.length/5){
             this.setState({
                 pageCount: this.state.pageCount+1
@@ -97,6 +98,7 @@ class ProductsContainer extends React.Component {
     }
 
     dePage = () => {
+        window.scrollTo(0, 0);
         if(this.state.pageCount > 1){
             this.setState({
                 pageCount: this.state.pageCount-1
@@ -105,6 +107,7 @@ class ProductsContainer extends React.Component {
     }
 
     pageChange = (e) => {
+        window.scrollTo(0, 0);
         this.setState({
             pageCount: Number(e.target.value)
         });
